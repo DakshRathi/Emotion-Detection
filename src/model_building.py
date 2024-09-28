@@ -82,7 +82,7 @@ def main() -> None:
         clf = train_model(X_train, y_train, params)
 
         # Save the trained model
-        save_model(clf, Path('model.joblib'))
+        save_model(clf, Path('models/model.joblib'))
 
         logger.info("Model building pipeline completed successfully.")
     except Exception as e:

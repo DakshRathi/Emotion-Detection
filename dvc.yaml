@@ -36,12 +36,12 @@ stages:
     - model_building.n_estimators
     - model_building.learning_rate
     outs:
-    - model.joblib
+    - models/model.joblib
   model_evaluation:
     cmd: python src/model_evaluation.py
     deps:
-    - model.joblib
+    - models/model.joblib
     - src/model_evaluation.py
     - src/utils.py
     metrics:
-    - metrics.json
+    - reports/metrics.json

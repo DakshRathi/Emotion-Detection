@@ -122,7 +122,7 @@ def main() -> None:
     """
     try:
         # Load the trained model
-        clf = load_model(Path('model.joblib'))
+        clf = load_model(Path('models/model.joblib'))
 
         # Load the test data
         test_data = load_data(Path('./data/processed/test_bow.csv'), logger)
@@ -135,7 +135,7 @@ def main() -> None:
         metrics = evaluate_model(clf, X_test, y_test)
 
         # Save the evaluation metrics
-        save_metrics(metrics, Path('metrics.json'))
+        save_metrics(metrics, Path('reports/metrics.json'))
 
         logger.info("Model evaluation pipeline completed successfully.")
     except Exception as e:
