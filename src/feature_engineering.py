@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import yaml
 import logging
 from pathlib import Path
 from sklearn.feature_extraction.text import CountVectorizer
