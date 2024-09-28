@@ -2,8 +2,18 @@ data_ingestion:
   test_size: 0.2
 
 feature_engineering:
-  max_features: 200
+  max_features: 150
 
 model_building:
- n_estimators: 400
- learning_rate: 0.1 
+  n_estimators: 150        # Number of boosting iterations
+  learning_rate: 0.1       # Shrinks the contribution of each tree
+  max_depth: -1            # Maximum depth of a tree (no limit if -1)
+  num_leaves: 31           # Maximum number of leaves in one tree
+  min_data_in_leaf: 20     # Minimum number of data points in a leaf
+  feature_fraction: 0.9    # Fraction of features to use for each iteration
+  bagging_fraction: 0.8    # Fraction of data to use for each iteration
+  bagging_freq: 5          # Frequency for bagging
+  lambda_l1: 0.0           # L1 regularization term
+  lambda_l2: 0.0           # L2 regularization term
+  boosting_type: goss
+  random_state: 42         # For reproducibility
