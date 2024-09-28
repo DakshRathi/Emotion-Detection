@@ -125,7 +125,7 @@ def main() -> None:
         clf = load_model(Path('models/model.joblib'))
 
         # Load the test data
-        test_data = load_data(Path('./data/processed/test_bow.csv'), logger)
+        test_data = load_data(Path('./data/processed/test_tfidf.csv'), logger)
 
         # Prepare input features and labels
         X_test = test_data.iloc[:, :-1].values
