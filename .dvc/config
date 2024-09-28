@@ -1,4 +1,4 @@
 [core]
-    remote = myremote
-['remote "myremote"']
-    url = /Users/daksh/Desktop/MLOps/storage
+    remote = dvcstore
+['remote "dvcstore"']
+    url = s3://emotiondakshdvc
