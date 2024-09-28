@@ -1,9 +1,16 @@
-black
-flake8
-isort
-loguru
-pip
-python-dotenv
-tqdm
-typer
--e .
+click==8.1.7
+joblib==1.4.2
+nltk==3.9.1
+numpy==2.1.1
+pandas==2.2.3
+python-dateutil==2.9.0.post0
+pytz==2024.2
+regex==2024.9.11
+scikit-learn==1.5.2
+scipy==1.14.1
+setuptools==75.1.0
+six==1.16.0
+threadpoolctl==3.5.0
+tqdm==4.66.5
+tzdata==2024.2
+wheel==0.44.0
