@@ -72,7 +72,7 @@ def main() -> None:
         params = load_params(Path('params.yaml'), logger)['model_building']
 
         # Load the training data
-        train_data = load_data(Path('./data/features/train_bow.csv'), logger)
+        train_data = load_data(Path('./data/processed/train_bow.csv'), logger)
 
         # Prepare input features and labels
         X_train = train_data.iloc[:, :-1].values

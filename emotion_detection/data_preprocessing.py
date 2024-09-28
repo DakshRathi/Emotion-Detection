@@ -149,7 +149,7 @@ def main() -> None:
         test_processed_data = normalize_text(test_data)
 
         # Create data/processed directory
-        data_path = Path("data") / "processed"
+        data_path = Path("data") / "interim"
         data_path.mkdir(parents=True, exist_ok=True)
 
         # Save the processed data

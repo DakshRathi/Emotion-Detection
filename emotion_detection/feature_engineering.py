@@ -50,8 +50,8 @@ def main() -> None:
         params = load_params(Path('params.yaml'), logger)['feature_engineering']
 
         # Load the data
-        train_data = load_data(Path('./data/processed/train_processed.csv'), logger)
-        test_data = load_data(Path('./data/processed/test_processed.csv'), logger)
+        train_data = load_data(Path('./data/interim/train_processed.csv'), logger)
+        test_data = load_data(Path('./data/interim/test_processed.csv'), logger)
 
         # Fill missing values
         train_data.fillna('', inplace=True)
@@ -75,7 +75,7 @@ def main() -> None:
         test_df['label'] = y_test
 
         # Create data/features directory
-        data_path = Path("data") / "features"
+        data_path = Path("data") / "processed"
         data_path.mkdir(parents=True, exist_ok=True)
 
         # Save the processed data
