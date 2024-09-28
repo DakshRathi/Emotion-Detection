@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
 import yaml
-from typing import Tuple, Dict
+from typing import Tuple
 from pathlib import Path
 import logging
 from utils import Logger, load_params, save_data
@@ -39,12 +40,10 @@ def load_data(url: str) -> pd.DataFrame:
 def preprocess_data(
     df: pd.DataFrame, 
     columns_to_drop: list, 
-    target_column: str, 
-    target_mapping: Dict[str, int], 
-    sentiments_to_keep: list
+    target_column: str
 ) -> pd.DataFrame:
     """
-    Preprocess the dataset by dropping columns and filtering sentiments.
+    Preprocess the dataset by dropping columns and encoding target variables.
 
     Parameters
     ----------
@@ -54,10 +53,6 @@ def preprocess_data(
         The columns to drop from the dataset.
     target_column : str
         The column containing the target variable.
-    target_mapping : Dict[str, int]
-        Mapping of sentiment labels to numerical values.
-    sentiments_to_keep : list
-        The sentiments to keep in the dataset.
 
     Returns
     -------
@@ -66,13 +61,18 @@ def preprocess_data(
     """
     try:
         logger.info("Preprocessing data")
-        logger.debug(f"Dropping columns {columns_to_drop} and filtering sentiments {sentiments_to_keep}")
+        logger.debug(f"Dropping columns {columns_to_drop}")
         df = df.drop(columns=columns_to_drop)
-        final_df = df[df[target_column].isin(sentiments_to_keep)]
-        final_df[target_column].replace(target_mapping, inplace=True)
+        
+        # Encode target variables using LabelEncoder
+        if target_column in df.columns:
+            label_encoder = LabelEncoder()
+            df[target_column] = label_encoder.fit_transform(df[target_column])
+            logger.debug(f"Encoded target variable '{target_column}' with classes: {label_encoder.classes_}")
+
         logger.info("Data preprocessing completed successfully.")
-        logger.debug(f"Final dataframe shape: {final_df.shape}")
-        return final_df
+        logger.debug(f"Final dataframe shape: {df.shape}")
+        return df
     except KeyError as e:
         logger.error(f"Error in preprocessing: {e}")
         raise e
@@ -105,7 +105,6 @@ def split_data(
     logger.debug(f"Data split into {len(train_data)} train records and {len(test_data)} test records.")
     return train_data, test_data
 
-
 # Main function to execute the pipeline
 def main(params_path: str) -> None:
     """
@@ -135,10 +134,8 @@ def main(params_path: str) -> None:
         # Preprocess the data
         columns_to_drop = ['tweet_id']
         target_column = 'sentiment'
-        target_mapping = {'neutral': 1, 'sadness': 0}
-        sentiments_to_keep = ['neutral', 'sadness']
         
-        final_df = preprocess_data(df, columns_to_drop, target_column, target_mapping, sentiments_to_keep)
+        final_df = preprocess_data(df, columns_to_drop, target_column)
 
         # Split the data into train and test sets
         test_size = params['test_size']
