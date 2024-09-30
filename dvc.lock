@@ -77,8 +77,8 @@ stages:
       nfiles: 2
     - path: src/model_building.py
       hash: md5
-      md5: c6ffc3f8c9f62b89c0b930077eaa5cfd
-      size: 3541
+      md5: 7bdd16f70324a3acb9061c2f6950f663
+      size: 3529
     - path: src/utils.py
       hash: md5
       md5: 00e779a3cbd3181528816d9f15fd2cf6
@@ -86,19 +86,19 @@ stages:
     params:
       params.yaml:
         model_building.learning_rate: 0.1
-        model_building.n_estimators: 150
+        model_building.n_estimators: 100
     outs:
     - path: models/model.joblib
       hash: md5
-      md5: 1ccb5673c21da1af2557f0f23727cac3
-      size: 6662172
+      md5: 67d78113b8271620de77c25a0c8bea2b
+      size: 3700924
   model_evaluation:
     cmd: python src/model_evaluation.py
     deps:
     - path: models/model.joblib
       hash: md5
-      md5: 1ccb5673c21da1af2557f0f23727cac3
-      size: 6662172
+      md5: 67d78113b8271620de77c25a0c8bea2b
+      size: 3700924
     - path: src/model_evaluation.py
       hash: md5
       md5: a05642a6aab00b38d2a3aa4de9d3f0d6
@@ -110,5 +110,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: 93ea58e7dc677c0e1515c9dd859810ff
+      md5: 35f9efa16c643cf5604a85375e6d5fb0
       size: 121

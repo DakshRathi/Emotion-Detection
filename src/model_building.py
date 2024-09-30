@@ -37,7 +37,7 @@ def train_model(X: np.ndarray, y: np.ndarray, params: dict) -> LGBMClassifier:
             max_depth=params.get('max_depth', -1),               # Max depth of trees (-1 means no limit)
             num_leaves=params.get('num_leaves', 31),             # Maximum number of leaves in one tree
             min_data_in_leaf=params.get('min_data_in_leaf', 20), # Minimum number of samples in a leaf
-            boosting_type=params.get('boosting_type', 'gbdt'),   # Boosting type (gbdt, dart, goss)
+            boosting_type=params['boosting_type'],   # Boosting type (gbdt, dart, goss)
             subsample=params.get('subsample', 1.0),              # Fraction of data used for fitting each tree
             colsample_bytree=params.get('colsample_bytree', 1.0),# Fraction of features used for fitting each tree
             reg_lambda=params.get('reg_lambda', 0.0),            # L2 regularization term
